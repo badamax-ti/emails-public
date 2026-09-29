@@ -2,3 +2,4 @@
 # Nunca publicar instrucciones internas
 CLAUDE.md
 *.local.md
+.DS_Store
