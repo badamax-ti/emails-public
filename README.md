@@ -4,12 +4,32 @@ Hosting estático (GitHub Pages) para emails de marketing/comunicaciones de Bada
 
 ## Cómo agregar una nueva campaña
 
-1. Crear carpeta con slug descriptivo: `nombre-campana-NN/`
-2. Adentro: el `.html` + todas las imágenes referenciadas con paths relativos
-3. Editar `index.html` agregando un link
-4. `git add . && git commit -m "..." && git push`
+1. Crear carpeta con slug descriptivo: `nombre-campana-NN/` (newsletter: `entregables-<mes>-<año>-NN/`).
+2. Adentro: el `.html` + todas las imágenes referenciadas con paths relativos.
+3. Editar `index.html` agregando un link.
 
-GitHub Pages publica automáticamente en https://badamax-ti.github.io/emails-public/
+## Cómo publicar en GitHub Pages
+
+GitHub Pages publica automáticamente lo que está en `main` en
+https://badamax-ti.github.io/emails-public/. **Mergear a `main` es publicar**, así que todo va por
+rama + PR:
+
+```bash
+git checkout main && git pull
+git checkout -b newsletter-NN-<mes>
+git add <carpeta>/ index.html            # y README.md si cambió
+git commit -m "Lo que entregamos NN · <rango de fechas>"
+git push -u origin newsletter-NN-<mes>
+gh pr create --base main --title "Lo que entregamos NN · <rango de fechas>"
+```
+
+Antes de mergear, revisar el PR contra la checklist de abajo. Después de mergear:
+
+1. Esperar que termine el deploy de Pages (pestaña *Actions* → *pages build and deployment*,
+   1–2 minutos).
+2. Abrir `https://badamax-ti.github.io/emails-public/<carpeta>/<archivo>.html` y verificar que
+   cargan las imágenes y que es la versión nueva (si se ve la antigua, recargar sin caché).
+3. Recién ahí enviar el correo: las imágenes del mail se cargan desde esa URL pública.
 
 ## Newsletter "Lo que entregamos": checklist antes de publicar
 
